@@ -72,8 +72,8 @@
         <a href="#gift-section" class="btn btn-outline">
           <span>Open Devu's Gift 🎁</span>
         </a>
-        <a href="#scratch-section" class="btn btn-glass">
-          <span>Secret Fortune 👑</span>
+        <a href="#song-section" class="btn btn-glass">
+          <span>Our Song 🎵</span>
         </a>
       </div>
 
@@ -254,6 +254,94 @@
 
       <div class="custom-photo-tip">
         <span>💡 <em>Tip:</em> Tap <strong>"Change Photo"</strong> on the first Polaroid or click <strong>Customize</strong> in the top menu to put Devu's real photo!</span>
+      </div>
+    </section>
+
+    <!-- THE SONG THAT REMINDS ME OF YOU -->
+    <section class="section song-section" id="song-section">
+      <div class="section-header">
+        <span class="section-tag">A Melody For Devu</span>
+        <h2 class="section-title">The Song That Reminds Me Of You 🎵</h2>
+        <p class="section-desc">Whenever this melody plays, every single word feels like it was written just for you and our bond.</p>
+      </div>
+
+      <div class="song-player-container glass-panel">
+        <div class="song-player-visual">
+          <!-- Spinning Vinyl Record -->
+          <div class="vinyl-record-wrap">
+            <div class="vinyl-disc" id="vinylDisc">
+              <div class="vinyl-grooves"></div>
+              <div class="vinyl-center-label">
+                <span class="vinyl-emoji">🍷</span>
+                <span class="vinyl-title">Devu</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Player Controls & Equalizer -->
+          <div class="player-controls-wrap">
+            <div class="song-info-meta">
+              <span class="song-badge">Special Dedication</span>
+              <h3 class="song-track-name" id="displaySongTitle">Our Unbreakable Bond</h3>
+              <p class="song-artist-name">Dedicated to Devatha (Devu)</p>
+            </div>
+
+            <!-- Animated Sound Equalizer Waves -->
+            <div class="sound-equalizer" id="soundEqualizer" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="song-progress-container">
+              <div class="progress-bar-bg" id="progressBarBg">
+                <div class="progress-bar-fill" id="progressBarFill"></div>
+              </div>
+              <div class="song-time-display">
+                <span id="songCurrentTime">0:00</span>
+                <span id="songDuration">--:--</span>
+              </div>
+            </div>
+
+            <!-- Audio Buttons -->
+            <div class="player-buttons-row">
+              <button id="songPlayPauseBtn" class="song-play-btn" title="Play or Pause Song" aria-label="Play song">
+                <span class="play-icon" id="playIcon">▶</span>
+              </button>
+              <label for="songFileInput" class="btn btn-sm btn-outline choose-song-btn" title="Choose audio file to play">
+                <span>🎵 Choose Audio File</span>
+              </label>
+              <input type="file" id="songFileInput" accept="audio/*" style="display: none;">
+            </div>
+
+            <p class="song-hint" id="songStatusHint">
+              Tap <strong>Play ▶</strong> to listen. <em>(You can choose your audio file anytime with "Choose Audio File")</em>
+            </p>
+
+            <!-- Hidden Audio Element -->
+            <audio id="specialSongAudio" preload="metadata" src="song.mp3"></audio>
+          </div>
+        </div>
+
+        <!-- Lyrics Display Card -->
+        <div class="lyrics-card">
+          <div class="lyrics-card-header">
+            <span class="lyrics-icon">📜</span>
+            <span class="lyrics-header-title">Lyrics Dedicated to Devu</span>
+          </div>
+          <div class="lyrics-body">
+            <p class="lyrics-line">Ethana thanima vattum bothum</p>
+            <p class="lyrics-line highlight">Enakkul ketkkum geetham nee</p>
+            <p class="lyrics-line">Thuyaram thaakkum bothum</p>
+            <p class="lyrics-line highlight">Un sirippil mayakkum saami nee</p>
+            <p class="lyrics-line">Kuraigal ulla ennai</p>
+            <p class="lyrics-line highlight">Viyandhu rasikkum idhayam nee</p>
+            <p class="lyrics-line">Nanae verukkum ennai</p>
+            <p class="lyrics-line highlight-gold">Vaari anaikkum jeevan nee ❤️</p>
+          </div>
+          <div class="lyrics-footer">
+            <span>✨ No matter what life brings, thank you for being that one irreplaceable person in my life. ✨</span>
+          </div>
+        </div>
       </div>
     </section>
 

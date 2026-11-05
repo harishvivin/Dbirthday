@@ -660,7 +660,170 @@ Here’s to another year of late-night gossips, uncontrollable laughter, dreams 
   }
 
   // ==========================================================================
-  // 9. CUSTOMIZATION MODAL & SHAREABLE LINK GENERATOR
+  // 9. SPECIAL SONG PLAYER (THE SONG THAT REMINDS ME OF YOU)
+  // ==========================================================================
+  const specialSongAudio = document.getElementById('specialSongAudio');
+  const songPlayPauseBtn = document.getElementById('songPlayPauseBtn');
+  const playIcon = document.getElementById('playIcon');
+  const vinylDisc = document.getElementById('vinylDisc');
+  const soundEqualizer = document.getElementById('soundEqualizer');
+  const progressBarBg = document.getElementById('progressBarBg');
+  const progressBarFill = document.getElementById('progressBarFill');
+  const songCurrentTime = document.getElementById('songCurrentTime');
+  const songDuration = document.getElementById('songDuration');
+  const songFileInput = document.getElementById('songFileInput');
+  const songStatusHint = document.getElementById('songStatusHint');
+  const displaySongTitle = document.getElementById('displaySongTitle');
+
+  let isPlayingSong = false;
+  let synthPreviewInterval = null;
+
+  function formatTime(seconds) {
+    if (isNaN(seconds) || seconds === Infinity) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  }
+
+  function setPlayerPlayingState(playing) {
+    isPlayingSong = playing;
+    if (playing) {
+      if (playIcon) playIcon.textContent = '⏸';
+      if (vinylDisc) vinylDisc.classList.add('playing');
+      if (soundEqualizer) soundEqualizer.classList.add('playing');
+      if (songStatusHint) songStatusHint.innerHTML = '🎵 Playing dedicated melody for Devu...';
+    } else {
+      if (playIcon) playIcon.textContent = '▶';
+      if (vinylDisc) vinylDisc.classList.remove('playing');
+      if (soundEqualizer) soundEqualizer.classList.remove('playing');
+      if (songStatusHint) songStatusHint.innerHTML = 'Tap <strong>Play ▶</strong> to listen. <em>(Or tap "Choose Audio File")</em>';
+      if (synthPreviewInterval) {
+        clearInterval(synthPreviewInterval);
+        synthPreviewInterval = null;
+      }
+    }
+  }
+
+  function playSynthSongPreview() {
+    getAudioContext();
+    const chords = [
+      [261.63, 329.63, 392.00], // C Major
+      [220.00, 261.63, 329.63], // A Minor
+      [174.61, 220.00, 261.63], // F Major
+      [196.00, 246.94, 293.66]  // G Major
+    ];
+    let chordIndex = 0;
+    setPlayerPlayingState(true);
+    launchConfetti(45);
+
+    function playChord() {
+      if (!isPlayingSong) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      const currentChord = chords[chordIndex % chords.length];
+      currentChord.forEach((freq, idx) => {
+        setTimeout(() => {
+          if (isPlayingSong) playSynthNote(freq, ctx.currentTime, 1.8, 0.18);
+        }, idx * 120);
+      });
+      chordIndex++;
+    }
+
+    playChord();
+    synthPreviewInterval = setInterval(playChord, 1800);
+
+    if (songStatusHint) {
+      songStatusHint.innerHTML = '✨ Preview melody playing! <strong>Choose your audio file</strong> to replace it anytime.';
+    }
+  }
+
+  if (songPlayPauseBtn && specialSongAudio) {
+    songPlayPauseBtn.addEventListener('click', () => {
+      // If ambient birthday music is playing, pause it so they don't clash
+      if (isPlayingMusic && musicToggleBtn) {
+        musicToggleBtn.click();
+      }
+
+      if (!isPlayingSong) {
+        // Try playing the audio element
+        const playPromise = specialSongAudio.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setPlayerPlayingState(true);
+              launchConfetti(50);
+            })
+            .catch(() => {
+              // Audio file not present yet, run pleasant synth preview
+              playSynthSongPreview();
+            });
+        } else {
+          setPlayerPlayingState(true);
+        }
+      } else {
+        specialSongAudio.pause();
+        setPlayerPlayingState(false);
+      }
+    });
+
+    specialSongAudio.addEventListener('timeupdate', () => {
+      if (specialSongAudio.duration) {
+        const percent = (specialSongAudio.currentTime / specialSongAudio.duration) * 100;
+        if (progressBarFill) progressBarFill.style.width = `${percent}%`;
+        if (songCurrentTime) songCurrentTime.textContent = formatTime(specialSongAudio.currentTime);
+        if (songDuration) songDuration.textContent = formatTime(specialSongAudio.duration);
+      }
+    });
+
+    specialSongAudio.addEventListener('loadedmetadata', () => {
+      if (songDuration) songDuration.textContent = formatTime(specialSongAudio.duration);
+    });
+
+    specialSongAudio.addEventListener('ended', () => {
+      setPlayerPlayingState(false);
+      if (progressBarFill) progressBarFill.style.width = '0%';
+      if (songCurrentTime) songCurrentTime.textContent = '0:00';
+    });
+  }
+
+  if (progressBarBg && specialSongAudio) {
+    progressBarBg.addEventListener('click', (e) => {
+      if (specialSongAudio.duration) {
+        const rect = progressBarBg.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const width = rect.width;
+        specialSongAudio.currentTime = (clickX / width) * specialSongAudio.duration;
+      }
+    });
+  }
+
+  if (songFileInput && specialSongAudio) {
+    songFileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        if (synthPreviewInterval) {
+          clearInterval(synthPreviewInterval);
+          synthPreviewInterval = null;
+        }
+        const fileUrl = URL.createObjectURL(file);
+        specialSongAudio.src = fileUrl;
+        specialSongAudio.load();
+        if (displaySongTitle) {
+          const cleanName = file.name.replace(/\.[^/.]+$/, "");
+          displaySongTitle.textContent = cleanName;
+        }
+        specialSongAudio.play().then(() => {
+          setPlayerPlayingState(true);
+          launchConfetti(80);
+        }).catch(err => {
+          console.warn('Audio auto-play prevented:', err);
+        });
+      }
+    });
+  }
+
+  // ==========================================================================
+  // 10. CUSTOMIZATION MODAL & SHAREABLE LINK GENERATOR
   // ==========================================================================
   const customizeBtn = document.getElementById('customizeBtn');
   const customModal = document.getElementById('customModal');

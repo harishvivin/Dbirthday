@@ -34,10 +34,16 @@ An elegant, interactive, red wine-themed static birthday celebration webpage cra
    - Four aesthetic vintage polaroid frames with sweet bestie captions.
    - **Custom Photo Upload**: Click *"Change Photo"* on the first polaroid or use the Customize menu to upload a picture of Devu directly from your computer or phone (saved securely in your browser's `localStorage`).
 
-6. **Interactive Scratch Card (Devu's Secret Fortune)**:
+6. **The Song That Reminds Me Of You 🎵**:
+   - A dedicated music player section featuring a spinning velvet-wine vinyl record, animated equalizer bars, live progress bar, and play/pause controls.
+   - Presents the heartfelt lyrics dedicated to Devu:
+     > *Ethana thanima vattum bothum / Enakkul ketkkum geetham nee...*
+   - **Custom Song Ready**: Simply click **"Choose Audio File"** to select your song from your device, or place a file named `song.mp3` directly in the project directory. If clicked before adding a file, it plays a gentle melodic preview!
+
+7. **Interactive Scratch Card (Devu's Secret Fortune)**:
    - A gold foil scratch surface. Use your cursor or finger (on mobile) to scratch it off and reveal Devu's secret fortune and best-friend guarantee!
 
-7. **Live Customizer & Shareable URL**:
+8. **Live Customizer & Shareable URL**:
    - Click **"Customize"** in the top navigation bar to adjust nicknames, quotes, letters, or sender names.
    - Automatically generates a copyable share link (`?name=Devu&from=...`) so you can send it directly to her via WhatsApp, Instagram, or iMessage.
 
