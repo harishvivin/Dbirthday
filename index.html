@@ -25,22 +25,18 @@
   <!-- Top Ambient Sound & Actions Bar -->
   <header class="top-nav">
     <div class="brand">
-      <span class="wine-glass-icon">🍷</span>
-      <span class="brand-text">Devu's Birthday Toast</span>
-      <span class="brand-text-mobile">Devu 🍷</span>
+      <span class="brand-icon">👑</span>
+      <span class="brand-text">Devu's Birthday Celebration</span>
+      <span class="brand-text-mobile">Devu 👑</span>
     </div>
     <div class="nav-actions">
       <button id="musicToggleBtn" class="pill-btn" title="Play Birthday Music-Box Melody" aria-label="Toggle Birthday Melody">
         <span class="icon">🎵</span>
         <span class="btn-text"><span class="desktop-only">Music: </span><strong id="musicStatus">OFF</strong></span>
       </button>
-      <button id="confettiBtn" class="pill-btn" title="Throw Confetti for Devu!" aria-label="Cheers Confetti">
+      <button id="confettiBtn" class="pill-btn primary-pill" title="Throw Confetti for Devu!" aria-label="Cheers Confetti">
         <span class="icon">🎉</span>
         <span class="btn-text">Cheers!</span>
-      </button>
-      <button id="customizeBtn" class="pill-btn primary-pill" title="Edit details or photo" aria-label="Customize page">
-        <span class="icon">⚙️</span>
-        <span class="btn-text"><span class="desktop-only">Personalize</span><span class="mobile-only">Edit</span></span>
       </button>
     </div>
   </header>
@@ -253,7 +249,7 @@
       <input type="file" id="quickPhotoUpload" accept="image/*" style="display: none;">
 
       <div class="custom-photo-tip">
-        <span>💡 <em>Tip:</em> Tap <strong>"Change Photo"</strong> on the first Polaroid or click <strong>Customize</strong> in the top menu to put Devu's real photo!</span>
+        <span>💡 <em>Tip:</em> Tap <strong>"Change Photo"</strong> on the first Polaroid to put Devu's real photo anytime!</span>
       </div>
     </section>
 
@@ -307,14 +303,10 @@
               <button id="songPlayPauseBtn" class="song-play-btn" title="Play or Pause Song" aria-label="Play song">
                 <span class="play-icon" id="playIcon">▶</span>
               </button>
-              <label for="songFileInput" class="btn btn-sm btn-outline choose-song-btn" title="Choose audio file to play">
-                <span>🎵 Choose Audio File</span>
-              </label>
-              <input type="file" id="songFileInput" accept="audio/*" style="display: none;">
             </div>
 
             <p class="song-hint" id="songStatusHint">
-              Tap <strong>Play ▶</strong> to listen to our song! 🍷
+              Tap <strong>Play ▶</strong> to listen to our song! 💖
             </p>
 
             <!-- Hidden Audio Element -->
@@ -384,67 +376,6 @@
     </footer>
 
   </main>
-
-  <!-- CUSTOMIZATION MODAL -->
-  <div class="modal-overlay hidden" id="customModal">
-    <div class="modal-card glass-panel">
-      <div class="modal-header">
-        <h3>Personalize Devu's Page 🍷</h3>
-        <button id="closeModalBtn" class="close-x" aria-label="Close modal">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <p class="modal-instruction">
-          Update Devu's nicknames, your name, special messages, or upload her favorite photo!
-        </p>
-
-        <div class="form-group">
-          <label for="modalRecipientInput">Nickname (Hero Display)</label>
-          <input type="text" id="modalRecipientInput" placeholder="e.g. Devu ✨">
-        </div>
-
-        <div class="form-group">
-          <label for="modalSubtitleInput">Hero Headline Quote</label>
-          <input type="text" id="modalSubtitleInput" placeholder="Sweet quote about friendship or wine...">
-        </div>
-
-        <div class="form-group">
-          <label for="modalSenderInput">Your Name (Sender)</label>
-          <input type="text" id="modalSenderInput" placeholder="e.g. Your Bestie, Alex, Ananya">
-        </div>
-
-        <div class="form-group">
-          <label for="modalLetterInput">Letter in the Gift Box</label>
-          <textarea id="modalLetterInput" rows="4" placeholder="Your heartfelt personal letter for Devu..."></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="modalFortuneInput">Secret Scratch Fortune Message</label>
-          <input type="text" id="modalFortuneInput" placeholder="The hidden compliment or secret joke...">
-        </div>
-
-        <div class="form-group">
-          <label>Upload Devu's Real Photo (Polaroid 1)</label>
-          <input type="file" id="modalPhotoInput" accept="image/*">
-          <small class="hint">Upload a picture of Devu to place on the main polaroid card.</small>
-        </div>
-
-        <div class="share-box">
-          <label>Shareable Link for Devu:</label>
-          <div class="share-input-group">
-            <input type="text" id="shareUrlInput" readonly>
-            <button id="copyShareUrlBtn" class="btn btn-sm btn-gold">Copy Link 📋</button>
-          </div>
-          <span id="copySuccessMsg" class="copy-success hidden">Link copied to clipboard! ✨</span>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button id="saveCustomizeBtn" class="btn btn-gold">Apply Changes</button>
-        <button id="resetDefaultsBtn" class="btn btn-outline">Reset Defaults</button>
-      </div>
-    </div>
-  </div>
 
   <script src="script.js"></script>
 </body>

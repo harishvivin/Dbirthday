@@ -113,10 +113,16 @@ body {
   gap: 10px;
 }
 
-.wine-glass-icon {
+.brand-icon {
   font-size: 1.6rem;
-  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
-  animation: gentleWineWiggle 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6));
+  animation: gentleCrownFloat 3.5s ease-in-out infinite;
+}
+
+@keyframes gentleCrownFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-3px) rotate(-4deg); }
+  75% { transform: translateY(-1px) rotate(4deg); }
 }
 
 .brand-text {
@@ -1191,12 +1197,6 @@ body {
   margin-left: 2px; /* Visual center for triangle */
 }
 
-.choose-song-btn {
-  font-size: 0.8rem;
-  padding: 8px 16px;
-  cursor: pointer;
-}
-
 .song-hint {
   font-size: 0.82rem;
   color: var(--text-muted);
@@ -1420,124 +1420,11 @@ body {
   letter-spacing: 1px;
 }
 
-/* ==========================================================================
-   CUSTOMIZATION MODAL
-   ========================================================================== */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(10, 1, 3, 0.85);
-  backdrop-filter: blur(8px);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-.modal-overlay.hidden,
+/* Utility hidden class */
+.hidden,
 .wish-message-prompt.hidden,
-.birthday-letter-card.hidden,
-.copy-success.hidden {
+.birthday-letter-card.hidden {
   display: none !important;
-}
-
-.modal-card {
-  width: 100%;
-  max-width: 580px;
-  max-height: 90vh;
-  overflow-y: auto;
-  padding: 30px;
-  position: relative;
-}
-
-.modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 18px;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-  padding-bottom: 12px;
-}
-
-.modal-header h3 {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-  color: var(--gold-light);
-}
-
-.close-x {
-  background: transparent;
-  border: none;
-  font-size: 1.8rem;
-  color: var(--text-muted);
-  cursor: pointer;
-  line-height: 1;
-}
-
-.close-x:hover {
-  color: var(--gold-primary);
-}
-
-.modal-instruction {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-bottom: 20px;
-}
-
-.hint {
-  font-size: 0.78rem;
-  color: var(--text-dim);
-}
-
-.share-box {
-  background: rgba(22, 3, 6, 0.6);
-  padding: 16px;
-  border-radius: var(--radius-sm);
-  border: 1px dashed rgba(212, 175, 55, 0.4);
-  margin-top: 20px;
-}
-
-.share-box label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--gold-light);
-  display: block;
-  margin-bottom: 8px;
-}
-
-.share-input-group {
-  display: flex;
-  gap: 8px;
-}
-
-.share-input-group input {
-  flex: 1;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  padding: 8px 12px;
-  color: var(--gold-light);
-  border-radius: var(--radius-sm);
-  font-size: 0.85rem;
-}
-
-.copy-success {
-  display: block;
-  color: #72e09a;
-  font-size: 0.82rem;
-  margin-top: 8px;
-  font-weight: 600;
-}
-
-.modal-footer {
-  display: flex;
-  gap: 12px;
-  justify-content: flex-end;
-  margin-top: 25px;
-  padding-top: 15px;
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 /* ==========================================================================
@@ -1839,49 +1726,7 @@ body {
   }
 
   .player-buttons-row {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .choose-song-btn {
-    width: 100%;
     justify-content: center;
-  }
-
-  /* Form & Modal Mobile Zoom Prevention */
-  .form-group input,
-  .form-group textarea,
-  .form-group select,
-  .share-input-group input {
-    font-size: 16px !important; /* Prevents auto-zoom in iOS Safari */
-  }
-
-  .modal-card {
-    padding: 20px 14px;
-    max-height: 88dvh;
-    border-radius: var(--radius-md);
-  }
-
-  .modal-header h3 {
-    font-size: 1.2rem;
-  }
-
-  .share-input-group {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .share-input-group .btn {
-    width: 100%;
-  }
-
-  .modal-footer {
-    flex-direction: column-reverse;
-    gap: 10px;
-  }
-
-  .modal-footer .btn {
-    width: 100%;
   }
 }
 
@@ -1896,7 +1741,7 @@ body {
     font-size: 0.9rem;
   }
 
-  .wine-glass-icon {
+  .brand-icon {
     font-size: 1.3rem;
   }
 
@@ -1996,11 +1841,6 @@ body {
 
   .scroll-cue {
     display: none;
-  }
-
-  .modal-card {
-    max-height: 92dvh;
-    padding: 16px;
   }
 }
 
