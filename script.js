@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     recipientName: 'Devu ✨',
     fullName: '(Devatha)',
     heroSubtitle: '"Like the rarest vintage of fine red wine, our friendship only grows deeper, richer, and more priceless with every year."',
-    senderName: 'Your Bestie Always ❤️',
+    senderName: 'Yours Vivin Always ❤️',
     letterBody: `First of all, un life-la nee always happy-ah irukkanum, un dreams ellam achieve pannanum. Namma friendship start aagi romba naal aagala, but indha short time-la neraya beautiful memories create pannirukkom. Un kooda pesuradhu, random-ah sirikkuradhu, mokka jokes, chinna chinna arguments, andha Salem memories ellame enakku romba special. 😂❤️ Sometimes words-la explain panna mudiyadha alavukku sila friendships namma life-la meaningful-ah maaridum, and namma friendship-um appadi dhaan. Nee eppovume indha same happy, crazy and genuine person-ah iru. Life-la evlo problems vandhaalum, don't forget to smile and never stop believing in yourself. Unakku edhavadhu kashtam irundha, as a friend naan unakku support-ah iruppen. Namma friendship-la ipdiye neraya memories create pannuvom. Once again, Happiest Birthday eruma! 😂❤️🫂 Stay blessed, stay happy and keep smiling always! ♾️`,
     fortuneText: '"You possess a rare heart of gold and a fiery spirit. This year is preparing wonders beyond your wildest imagination. Keep conquering the world, Devu!"',
     photo1: null
@@ -70,18 +70,19 @@ document.addEventListener('DOMContentLoaded', () => {
   initConfigFromStorageOrURL();
 
   // ==========================================================================
-  // 2. AMBIENT GOLD & WINE SPARKLE PARTICLES
+  // 2. HIGH-PERFORMANCE AMBIENT GOLD & WINE SPARKLE PARTICLES
   // ==========================================================================
   const sparkleCanvas = document.getElementById('sparkleCanvas');
-  const sparkleCtx = sparkleCanvas.getContext('2d');
+  const sparkleCtx = sparkleCanvas.getContext('2d', { alpha: true });
   let sparkles = [];
-  const SPARKLE_COUNT = 45;
+  const SPARKLE_COUNT = 28; // Optimized for 60fps smooth rendering
+  let isSparkleLoopRunning = true;
 
   function resizeSparkleCanvas() {
     sparkleCanvas.width = window.innerWidth;
     sparkleCanvas.height = window.innerHeight;
   }
-  window.addEventListener('resize', resizeSparkleCanvas);
+  window.addEventListener('resize', resizeSparkleCanvas, { passive: true });
   resizeSparkleCanvas();
 
   class SparkleParticle {
@@ -92,11 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
     reset(initial = false) {
       this.x = Math.random() * sparkleCanvas.width;
       this.y = initial ? Math.random() * sparkleCanvas.height : sparkleCanvas.height + 10;
-      this.radius = Math.random() * 2.2 + 0.6;
-      this.speedY = Math.random() * 0.7 + 0.3;
-      this.speedX = (Math.random() - 0.5) * 0.5;
-      this.opacity = Math.random() * 0.7 + 0.2;
-      this.fadeSpeed = Math.random() * 0.01 + 0.005;
+      this.radius = Math.random() * 2 + 0.8;
+      this.speedY = Math.random() * 0.6 + 0.25;
+      this.speedX = (Math.random() - 0.5) * 0.4;
+      this.opacity = Math.random() * 0.6 + 0.25;
+      this.fadeSpeed = Math.random() * 0.008 + 0.004;
       this.isGold = Math.random() > 0.35;
     }
 
@@ -113,19 +114,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     draw() {
-      sparkleCtx.save();
+      const alpha = Math.max(0, this.opacity);
+      // Soft glowing aura (fast zero-cost drawing without expensive shadowBlur)
+      sparkleCtx.beginPath();
+      sparkleCtx.arc(this.x, this.y, this.radius * 2.2, 0, Math.PI * 2);
+      sparkleCtx.fillStyle = this.isGold ? `rgba(245, 222, 140, ${alpha * 0.22})` : `rgba(214, 52, 85, ${alpha * 0.18})`;
+      sparkleCtx.fill();
+
+      // Sharp bright core
       sparkleCtx.beginPath();
       sparkleCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      if (this.isGold) {
-        sparkleCtx.fillStyle = `rgba(245, 222, 140, ${Math.max(0, this.opacity)})`;
-        sparkleCtx.shadowColor = 'rgba(212, 175, 55, 0.8)';
-      } else {
-        sparkleCtx.fillStyle = `rgba(214, 52, 85, ${Math.max(0, this.opacity * 0.8)})`;
-        sparkleCtx.shadowColor = 'rgba(184, 34, 61, 0.6)';
-      }
-      sparkleCtx.shadowBlur = 8;
+      sparkleCtx.fillStyle = this.isGold ? `rgba(255, 245, 210, ${alpha})` : `rgba(255, 130, 150, ${alpha})`;
       sparkleCtx.fill();
-      sparkleCtx.restore();
     }
   }
 
@@ -134,27 +134,39 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function animateSparkles() {
+    if (!isSparkleLoopRunning) return;
     sparkleCtx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
-    for (let s of sparkles) {
-      s.update();
-      s.draw();
+    for (let i = 0; i < sparkles.length; i++) {
+      sparkles[i].update();
+      sparkles[i].draw();
     }
     requestAnimationFrame(animateSparkles);
   }
-  animateSparkles();
+  requestAnimationFrame(animateSparkles);
+
+  // Pause sparkles when tab is inactive to free CPU/GPU
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      isSparkleLoopRunning = false;
+    } else {
+      isSparkleLoopRunning = true;
+      requestAnimationFrame(animateSparkles);
+    }
+  });
 
   // ==========================================================================
-  // 3. ZERO-DEPENDENCY CONFETTI CANNON ENGINE
+  // 3. ZERO-DEPENDENCY CONFETTI CANNON (EVENT-DRIVEN ON DEMAND)
   // ==========================================================================
   const confettiCanvas = document.getElementById('confettiCanvas');
-  const confettiCtx = confettiCanvas.getContext('2d');
+  const confettiCtx = confettiCanvas.getContext('2d', { alpha: true });
   let confettiParticles = [];
+  let isConfettiLoopRunning = false;
 
   function resizeConfettiCanvas() {
     confettiCanvas.width = window.innerWidth;
     confettiCanvas.height = window.innerHeight;
   }
-  window.addEventListener('resize', resizeConfettiCanvas);
+  window.addEventListener('resize', resizeConfettiCanvas, { passive: true });
   resizeConfettiCanvas();
 
   const CONFETTI_COLORS = [
@@ -170,15 +182,15 @@ document.addEventListener('DOMContentLoaded', () => {
     constructor(x, y) {
       this.x = x || confettiCanvas.width / 2;
       this.y = y || confettiCanvas.height * 0.35;
-      this.size = Math.random() * 10 + 6;
+      this.size = Math.random() * 9 + 5;
       this.color = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
-      this.vx = (Math.random() - 0.5) * 16;
-      this.vy = (Math.random() - 0.9) * 18 - 4;
+      this.vx = (Math.random() - 0.5) * 15;
+      this.vy = (Math.random() - 0.9) * 16 - 3;
       this.rotation = Math.random() * 360;
-      this.rotationSpeed = (Math.random() - 0.5) * 12;
+      this.rotationSpeed = (Math.random() - 0.5) * 10;
       this.gravity = 0.42;
       this.opacity = 1;
-      this.decay = Math.random() * 0.009 + 0.006;
+      this.decay = Math.random() * 0.01 + 0.007;
       this.shape = Math.random() > 0.25 ? 'rect' : 'circle';
     }
 
@@ -210,15 +222,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function launchConfetti(count = 120, originX, originY) {
+  function launchConfetti(count = 90, originX, originY) {
     const x = originX !== undefined ? originX : confettiCanvas.width / 2;
     const y = originY !== undefined ? originY : confettiCanvas.height * 0.35;
     for (let i = 0; i < count; i++) {
       confettiParticles.push(new ConfettiPiece(x, y));
     }
+    if (!isConfettiLoopRunning) {
+      isConfettiLoopRunning = true;
+      requestAnimationFrame(animateConfetti);
+    }
   }
 
   function animateConfetti() {
+    if (confettiParticles.length === 0) {
+      confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      isConfettiLoopRunning = false;
+      return;
+    }
+
     confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
     for (let i = confettiParticles.length - 1; i >= 0; i--) {
       const p = confettiParticles[i];
@@ -230,24 +252,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     requestAnimationFrame(animateConfetti);
   }
-  animateConfetti();
 
   // Top bar confetti button
   const confettiBtn = document.getElementById('confettiBtn');
   if (confettiBtn) {
-    confettiBtn.addEventListener('click', (e) => {
+    confettiBtn.addEventListener('click', () => {
       const rect = confettiBtn.getBoundingClientRect();
-      launchConfetti(90, rect.left + rect.width / 2, rect.bottom);
+      launchConfetti(80, rect.left + rect.width / 2, rect.bottom);
       playChimeNote(659.25, 0.4); // E5
     });
   }
 
   // ==========================================================================
-  // 4. WEB AUDIO SYNTHESIZER: "HAPPY BIRTHDAY" MUSIC-BOX TUNE
+  // 4. AUDIO CHIME ENGINE (FOR CELEBRATIONS & UNBOXING)
   // ==========================================================================
   let audioCtx = null;
-  let isPlayingMusic = false;
-  let musicTimeout = null;
 
   function getAudioContext() {
     if (!audioCtx) {
@@ -262,7 +281,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return audioCtx;
   }
 
-  // Soft celesta / chime tone generator
   function playSynthNote(freq, startTime, duration = 0.5, volume = 0.22) {
     const ctx = getAudioContext();
     if (!ctx) return;
@@ -270,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
 
-    osc.type = 'triangle'; // Sweet music-box like timbre
+    osc.type = 'triangle';
     osc.frequency.setValueAtTime(freq, startTime);
 
     gain.gain.setValueAtTime(0, startTime);
@@ -288,159 +306,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = getAudioContext();
     if (!ctx) return;
     playSynthNote(freq, ctx.currentTime, duration, 0.25);
-  }
-
-  // Happy Birthday Melody in C Major
-  // Note: frequency in Hz
-  const NOTES = {
-    C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23,
-    G4: 392.00, A4: 440.00, B4: 493.88,
-    C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46
-  };
-
-  const MELODY = [
-    { note: NOTES.C4, dur: 0.35, pause: 0.4 },
-    { note: NOTES.C4, dur: 0.25, pause: 0.3 },
-    { note: NOTES.D4, dur: 0.55, pause: 0.65 },
-    { note: NOTES.C4, dur: 0.55, pause: 0.65 },
-    { note: NOTES.F4, dur: 0.55, pause: 0.65 },
-    { note: NOTES.E4, dur: 0.95, pause: 1.15 },
-
-    { note: NOTES.C4, dur: 0.35, pause: 0.4 },
-    { note: NOTES.C4, dur: 0.25, pause: 0.3 },
-    { note: NOTES.D4, dur: 0.55, pause: 0.65 },
-    { note: NOTES.C4, dur: 0.55, pause: 0.65 },
-    { note: NOTES.G4, dur: 0.55, pause: 0.65 },
-    { note: NOTES.F4, dur: 0.95, pause: 1.15 },
-
-    { note: NOTES.C4, dur: 0.35, pause: 0.4 },
-    { note: NOTES.C4, dur: 0.25, pause: 0.3 },
-    { note: NOTES.C5, dur: 0.55, pause: 0.65 },
-    { note: NOTES.A4, dur: 0.55, pause: 0.65 },
-    { note: NOTES.F4, dur: 0.55, pause: 0.65 },
-    { note: NOTES.E4, dur: 0.55, pause: 0.65 },
-    { note: NOTES.D4, dur: 0.95, pause: 1.15 },
-
-    { note: NOTES.A4, dur: 0.35, pause: 0.4 },
-    { note: NOTES.A4, dur: 0.25, pause: 0.3 },
-    { note: NOTES.F4, dur: 0.55, pause: 0.65 },
-    { note: NOTES.G4, dur: 0.55, pause: 0.65 },
-    { note: NOTES.F4, dur: 1.2, pause: 1.5 }
-  ];
-
-  function playMelodyLoop() {
-    if (!isPlayingMusic) return;
-    const ctx = getAudioContext();
-    if (!ctx) return;
-
-    let timeOffset = 0;
-    MELODY.forEach((item) => {
-      setTimeout(() => {
-        if (isPlayingMusic) {
-          playSynthNote(item.note, ctx.currentTime, item.dur, 0.2);
-        }
-      }, timeOffset * 1000);
-      timeOffset += item.pause;
-    });
-
-    musicTimeout = setTimeout(() => {
-      if (isPlayingMusic) {
-        playMelodyLoop();
-      }
-    }, (timeOffset + 1.2) * 1000);
-  }
-
-  const musicToggleBtn = document.getElementById('musicToggleBtn');
-  const musicStatus = document.getElementById('musicStatus');
-
-  if (musicToggleBtn && musicStatus) {
-    musicToggleBtn.addEventListener('click', () => {
-      getAudioContext();
-      isPlayingMusic = !isPlayingMusic;
-
-      if (isPlayingMusic) {
-        musicStatus.textContent = 'ON';
-        musicToggleBtn.classList.add('primary-pill');
-        playMelodyLoop();
-      } else {
-        musicStatus.textContent = 'OFF';
-        musicToggleBtn.classList.remove('primary-pill');
-        if (musicTimeout) clearTimeout(musicTimeout);
-      }
-    });
-  }
-
-  // ==========================================================================
-  // 5. CAKE & CANDLE BLOW INTERACTION
-  // ==========================================================================
-  const candles = document.querySelectorAll('.candle');
-  const blowCandleBtn = document.getElementById('blowCandleBtn');
-  const relightCandleBtn = document.getElementById('relightCandleBtn');
-  const wishMessagePrompt = document.getElementById('wishMessagePrompt');
-
-  function areAllCandlesBlown() {
-    return Array.from(candles).every(c => c.getAttribute('data-lit') === 'false');
-  }
-
-  function blowOutCandle(candle) {
-    if (candle.getAttribute('data-lit') === 'true') {
-      candle.setAttribute('data-lit', 'false');
-      playChimeNote(784, 0.3); // G5 chime
-
-      if (areAllCandlesBlown()) {
-        celebrateWishGranted();
-      }
-    }
-  }
-
-  function celebrateWishGranted() {
-    if (wishMessagePrompt) {
-      wishMessagePrompt.classList.remove('hidden');
-    }
-    if (blowCandleBtn) blowCandleBtn.style.display = 'none';
-    if (relightCandleBtn) relightCandleBtn.style.display = 'inline-flex';
-
-    // Massive celebratory confetti
-    const cakeContainer = document.getElementById('cakeContainer');
-    const rect = cakeContainer.getBoundingClientRect();
-    launchConfetti(140, rect.left + rect.width / 2, rect.top + 30);
-
-    // Chime chords
-    setTimeout(() => playChimeNote(523.25, 0.8), 100);
-    setTimeout(() => playChimeNote(659.25, 0.8), 250);
-    setTimeout(() => playChimeNote(783.99, 1.2), 400);
-  }
-
-  // Click single candles
-  candles.forEach(candle => {
-    candle.addEventListener('click', () => {
-      blowOutCandle(candle);
-    });
-  });
-
-  // "Blow Out Candles" button
-  if (blowCandleBtn) {
-    blowCandleBtn.addEventListener('click', () => {
-      candles.forEach((c, idx) => {
-        setTimeout(() => {
-          c.setAttribute('data-lit', 'false');
-        }, idx * 140);
-      });
-      setTimeout(() => {
-        celebrateWishGranted();
-      }, candles.length * 140 + 100);
-    });
-  }
-
-  // "Relight Candles" button
-  if (relightCandleBtn) {
-    relightCandleBtn.addEventListener('click', () => {
-      candles.forEach(c => c.setAttribute('data-lit', 'true'));
-      if (wishMessagePrompt) wishMessagePrompt.classList.add('hidden');
-      relightCandleBtn.style.display = 'none';
-      if (blowCandleBtn) blowCandleBtn.style.display = 'inline-flex';
-      playChimeNote(440, 0.4);
-    });
   }
 
   // ==========================================================================
@@ -729,17 +594,12 @@ document.addEventListener('DOMContentLoaded', () => {
     synthPreviewInterval = setInterval(playChord, 1800);
 
     if (songStatusHint) {
-      songStatusHint.innerHTML = '✨ Preview melody playing! <strong>Choose your audio file</strong> to replace it anytime.';
+      songStatusHint.innerHTML = '✨ Playing dedicated melody for Devu! 💖';
     }
   }
 
   if (songPlayPauseBtn && specialSongAudio) {
     songPlayPauseBtn.addEventListener('click', () => {
-      // If ambient birthday music is playing, pause it so they don't clash
-      if (isPlayingMusic && musicToggleBtn) {
-        musicToggleBtn.click();
-      }
-
       if (!isPlayingSong) {
         // Try playing the audio element
         const playPromise = specialSongAudio.play();
@@ -750,7 +610,7 @@ document.addEventListener('DOMContentLoaded', () => {
               launchConfetti(50);
             })
             .catch(() => {
-              // Audio file not present yet, run pleasant synth preview
+              // Audio file blocked or not found, run pleasant synth preview
               playSynthSongPreview();
             });
         } else {

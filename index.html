@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
@@ -7,15 +8,19 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Happy Birthday Devu! 🍷✨ Cheers to You, Devatha!</title>
-  <meta name="description" content="A special, red wine themed luxury birthday celebration webpage crafted for Devatha (Devu).">
-  
+  <meta name="description"
+    content="A special, red wine themed luxury birthday celebration webpage crafted for Devatha (Devu).">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;900&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;900&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <!-- Ambient Floating Golden & Wine Dust Canvas -->
@@ -30,11 +35,8 @@
       <span class="brand-text-mobile">Devu 👑</span>
     </div>
     <div class="nav-actions">
-      <button id="musicToggleBtn" class="pill-btn" title="Play Birthday Music-Box Melody" aria-label="Toggle Birthday Melody">
-        <span class="icon">🎵</span>
-        <span class="btn-text"><span class="desktop-only">Music: </span><strong id="musicStatus">OFF</strong></span>
-      </button>
-      <button id="confettiBtn" class="pill-btn primary-pill" title="Throw Confetti for Devu!" aria-label="Cheers Confetti">
+      <button id="confettiBtn" class="pill-btn primary-pill" title="Throw Confetti for Devu!"
+        aria-label="Cheers Confetti">
         <span class="icon">🎉</span>
         <span class="btn-text">Cheers!</span>
       </button>
@@ -58,18 +60,19 @@
       </h1>
 
       <p class="hero-subtitle" id="displayHeroSubtitle">
-        "Like the rarest vintage of fine red wine, our friendship only grows deeper, richer, and more priceless with every year."
+        "Like the rarest vintage of fine red wine, our friendship only grows deeper, richer, and more priceless with
+        every year."
       </p>
 
       <div class="hero-cta-group">
-        <a href="#cake-section" class="btn btn-gold">
-          <span>Make a Wish 🎂</span>
-        </a>
-        <a href="#gift-section" class="btn btn-outline">
+        <a href="#gift-section" class="btn btn-gold">
           <span>Open Devu's Gift 🎁</span>
         </a>
-        <a href="#song-section" class="btn btn-glass">
+        <a href="#song-section" class="btn btn-outline">
           <span>Our Song 🎵</span>
+        </a>
+        <a href="#scratch-section" class="btn btn-glass">
+          <span>Secret Fortune 👑</span>
         </a>
       </div>
 
@@ -77,85 +80,6 @@
       <div class="scroll-cue">
         <span>Scroll down to celebrate</span>
         <div class="scroll-arrow">↓</div>
-      </div>
-    </section>
-
-    <!-- INTERACTIVE BIRTHDAY CAKE & CANDLE SECTION -->
-    <section class="section cake-section" id="cake-section">
-      <div class="section-header">
-        <span class="section-tag">Birthday Ritual</span>
-        <h2 class="section-title">Make a Wish, Devu!</h2>
-        <p class="section-desc">Close your eyes, make the biggest wish of your heart, and blow out the candles!</p>
-      </div>
-
-      <div class="cake-stage">
-        <div class="cake-container" id="cakeContainer" title="Click a flame to blow it out!">
-          <!-- Plate -->
-          <div class="cake-plate"></div>
-
-          <!-- Bottom Tier -->
-          <div class="cake-tier tier-bottom">
-            <div class="icing-drips">
-              <span></span><span></span><span></span><span></span><span></span>
-            </div>
-            <div class="cake-ribbon"></div>
-          </div>
-
-          <!-- Middle Tier -->
-          <div class="cake-tier tier-middle">
-            <div class="icing-drips">
-              <span></span><span></span><span></span><span></span>
-            </div>
-            <div class="gold-pearls">
-              <i></i><i></i><i></i><i></i><i></i>
-            </div>
-          </div>
-
-          <!-- Top Tier -->
-          <div class="cake-tier tier-top">
-            <div class="icing-drips">
-              <span></span><span></span><span></span>
-            </div>
-            
-            <!-- Candles -->
-            <div class="candles-wrapper" id="candlesWrapper">
-              <div class="candle" data-lit="true">
-                <div class="flame"></div>
-                <div class="smoke"></div>
-                <div class="wick"></div>
-                <div class="candle-body"></div>
-              </div>
-              <div class="candle active" data-lit="true">
-                <div class="flame"></div>
-                <div class="smoke"></div>
-                <div class="wick"></div>
-                <div class="candle-body"></div>
-              </div>
-              <div class="candle" data-lit="true">
-                <div class="flame"></div>
-                <div class="smoke"></div>
-                <div class="wick"></div>
-                <div class="candle-body"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cake-controls">
-          <button id="blowCandleBtn" class="btn btn-gold">
-            <span class="btn-icon">💨</span>
-            <span id="blowBtnLabel">Blow Out Candles</span>
-          </button>
-          <button id="relightCandleBtn" class="btn btn-outline" style="display: none;">
-            <span class="btn-icon">🔥</span>
-            <span>Relight Candles</span>
-          </button>
-        </div>
-
-        <div id="wishMessagePrompt" class="wish-message-prompt hidden">
-          <div class="gold-sparkle-text">✨ Devu's wish has been granted! ✨</div>
-          <p>May this year shower you with laughter, boundless success, endless peace, and unforgettable adventures!</p>
-        </div>
       </div>
     </section>
 
@@ -188,10 +112,18 @@
           <div class="letter-seal">🍷</div>
           <h3 class="letter-title">Dearest Devu (Devatha),</h3>
           <div class="letter-body" id="displayLetterBody">
-            <p>First of all, un life-la nee always happy-ah irukkanum, un dreams ellam achieve pannanum. Namma friendship start aagi romba naal aagala, but indha short time-la neraya beautiful memories create pannirukkom. Un kooda pesuradhu, random-ah sirikkuradhu, mokka jokes, chinna chinna arguments, andha Salem memories ellame enakku romba special. 😂❤️</p>
-            <p>Sometimes words-la explain panna mudiyadha alavukku sila friendships namma life-la meaningful-ah maaridum, and namma friendship-um appadi dhaan. Nee eppovume indha same happy, crazy and genuine person-ah iru. Life-la evlo problems vandhaalum, don't forget to smile and never stop believing in yourself.</p>
-            <p>Unakku edhavadhu kashtam irundha, as a friend naan unakku support-ah iruppen. Namma friendship-la ipdiye neraya memories create pannuvom. Once again, Happiest Birthday eruma! 😂❤️🫂 Stay blessed, stay happy and keep smiling always! ♾️</p>
-            <p class="letter-signature">Forever your best friend,<br><strong id="displaySenderName">Your Bestie Always ❤️</strong></p>
+            <p>First of all, un life-la nee always happy-ah irukkanum, un dreams ellam achieve pannanum. Namma
+              friendship start aagi romba naal aagala, but indha short time-la neraya beautiful memories create
+              pannirukkom. Un kooda pesuradhu, random-ah sirikkuradhu, mokka jokes, chinna chinna arguments, andha Salem
+              memories ellame enakku romba special. 😂❤️</p>
+            <p>Sometimes words-la explain panna mudiyadha alavukku sila friendships namma life-la meaningful-ah
+              maaridum, and namma friendship-um appadi dhaan. Nee eppovume indha same happy, crazy and genuine person-ah
+              iru. Life-la evlo problems vandhaalum, don't forget to smile and never stop believing in yourself.</p>
+            <p>Unakku edhavadhu kashtam irundha, as a friend naan unakku support-ah iruppen. Namma friendship-la ipdiye
+              neraya memories create pannuvom. Once again, Happiest Birthday eruma! 😂❤️🫂 Stay blessed, stay happy and
+              keep smiling always! ♾️</p>
+            <p class="letter-signature">Forever your best friend,<br><strong id="displaySenderName">Your Bestie Always
+                ❤️</strong></p>
           </div>
           <button id="closeLetterBtn" class="btn btn-sm btn-outline">Close Letter</button>
         </div>
@@ -210,11 +142,13 @@
         <!-- Card 1 -->
         <div class="polaroid-card rotate-neg" id="polaroidCard1">
           <div class="photo-frame">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Devu" class="polaroid-img" id="polaroidImg1">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"
+              alt="Devu" class="polaroid-img" id="polaroidImg1">
             <label class="photo-upload-overlay" for="quickPhotoUpload" title="Click to upload Devu's real photo">
               <span>📷 Change Photo</span>
             </label>
-            <button type="button" class="mobile-photo-badge" onclick="document.getElementById('quickPhotoUpload').click()" aria-label="Upload photo of Devu">
+            <button type="button" class="mobile-photo-badge"
+              onclick="document.getElementById('quickPhotoUpload').click()" aria-label="Upload photo of Devu">
               📷 Change Photo
             </button>
           </div>
@@ -224,7 +158,8 @@
         <!-- Card 2 -->
         <div class="polaroid-card rotate-pos" id="polaroidCard2">
           <div class="photo-frame">
-            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80" alt="Joyful Moments" class="polaroid-img" id="polaroidImg2">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80"
+              alt="Joyful Moments" class="polaroid-img" id="polaroidImg2">
           </div>
           <div class="polaroid-caption" id="caption2">Pure Laughter & Shenanigans 💛</div>
         </div>
@@ -232,7 +167,8 @@
         <!-- Card 3 -->
         <div class="polaroid-card rotate-slight" id="polaroidCard3">
           <div class="photo-frame">
-            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80" alt="Red Wine Toast" class="polaroid-img" id="polaroidImg3">
+            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80"
+              alt="Red Wine Toast" class="polaroid-img" id="polaroidImg3">
           </div>
           <div class="polaroid-caption" id="caption3">A Toast to Devu's Year 🍷</div>
         </div>
@@ -240,7 +176,8 @@
         <!-- Card 4 -->
         <div class="polaroid-card rotate-neg-slight" id="polaroidCard4">
           <div class="photo-frame">
-            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80" alt="Best Friends" class="polaroid-img" id="polaroidImg4">
+            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80"
+              alt="Best Friends" class="polaroid-img" id="polaroidImg4">
           </div>
           <div class="polaroid-caption" id="caption4">Besties For Life & Beyond 🥂</div>
         </div>
@@ -249,7 +186,8 @@
       <input type="file" id="quickPhotoUpload" accept="image/*" style="display: none;">
 
       <div class="custom-photo-tip">
-        <span>💡 <em>Tip:</em> Tap <strong>"Change Photo"</strong> on the first Polaroid to put Devu's real photo anytime!</span>
+        <span>💡 <em>Tip:</em> Tap <strong>"Change Photo"</strong> on the first Polaroid to put Devu's real photo
+          anytime!</span>
       </div>
     </section>
 
@@ -258,7 +196,8 @@
       <div class="section-header">
         <span class="section-tag">A Melody For Devu</span>
         <h2 class="section-title">The Song That Reminds Me Of You 🎵</h2>
-        <p class="section-desc">Whenever this melody plays, every single word feels like it was written just for you and our bond.</p>
+        <p class="section-desc">Whenever this melody plays, every single word feels like it was written just for you and
+          our bond.</p>
       </div>
 
       <div class="song-player-container glass-panel">
@@ -342,7 +281,8 @@
       <div class="section-header">
         <span class="section-tag">Interactive Secret</span>
         <h2 class="section-title">Devu's Secret Birthday Fortune</h2>
-        <p class="section-desc">Scratch off the golden seal below with your cursor or touch to uncover your secret message!</p>
+        <p class="section-desc">Scratch off the golden seal below with your cursor or touch to uncover your secret
+          message!</p>
       </div>
 
       <div class="scratch-wrapper">
@@ -350,7 +290,8 @@
           <div class="scratch-secret-content">
             <div class="secret-emoji">👑</div>
             <h4>Devatha, You Are Unstoppable!</h4>
-            <p id="displayFortuneText">"You possess a rare heart of gold and a fiery spirit. This year is preparing wonders beyond your wildest imagination. Keep conquering the world, Devu!"</p>
+            <p id="displayFortuneText">"You possess a rare heart of gold and a fiery spirit. This year is preparing
+              wonders beyond your wildest imagination. Keep conquering the world, Devu!"</p>
             <div class="secret-tag">Best Friend Guarantee: 100% Proud of You 🌟</div>
           </div>
           <!-- Scratch Surface Canvas -->
@@ -368,7 +309,7 @@
         <span class="wine-toast-emoji">🍷 Happy Birthday, Devu! 🥂</span>
       </div>
       <p class="footer-text">
-        Crafted with all the love in the universe, deep red wine aesthetics & golden sparkle for Devatha.
+        Crafted with all the love in the universe.
       </p>
       <div class="footer-meta">
         <span>Colors: Velvet Burgundy, Bordeaux Wine & Royal Gold</span>
@@ -379,4 +320,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>
