@@ -696,7 +696,7 @@ Here’s to another year of late-night gossips, uncontrollable laughter, dreams 
       if (playIcon) playIcon.textContent = '▶';
       if (vinylDisc) vinylDisc.classList.remove('playing');
       if (soundEqualizer) soundEqualizer.classList.remove('playing');
-      if (songStatusHint) songStatusHint.innerHTML = 'Tap <strong>Play ▶</strong> to listen. <em>(Or tap "Choose Audio File")</em>';
+      if (songStatusHint) songStatusHint.innerHTML = 'Tap <strong>Play ▶</strong> to listen to our song! 🍷';
       if (synthPreviewInterval) {
         clearInterval(synthPreviewInterval);
         synthPreviewInterval = null;
