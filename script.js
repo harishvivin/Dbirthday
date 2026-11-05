@@ -14,11 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fullName: '(Devatha)',
     heroSubtitle: '"Like the rarest vintage of fine red wine, our friendship only grows deeper, richer, and more priceless with every year."',
     senderName: 'Your Bestie Always ❤️',
-    letterBody: `From being my ultimate confidante to my partner-in-crime, you are hands down the best friend anyone could ever ask for.
-
-Your smile lights up every room, your strength inspires me every single day, and your chaotic, joyful energy makes life a million times better. Thank you for always listening, for laughing at the silly jokes, and for simply being your incredible self.
-
-Here’s to another year of late-night gossips, uncontrollable laughter, dreams coming true, and clinking glasses of red wine together!`,
+    letterBody: `First of all, un life-la nee always happy-ah irukkanum, un dreams ellam achieve pannanum. Namma friendship start aagi romba naal aagala, but indha short time-la neraya beautiful memories create pannirukkom. Un kooda pesuradhu, random-ah sirikkuradhu, mokka jokes, chinna chinna arguments, andha Salem memories ellame enakku romba special. 😂❤️ Sometimes words-la explain panna mudiyadha alavukku sila friendships namma life-la meaningful-ah maaridum, and namma friendship-um appadi dhaan. Nee eppovume indha same happy, crazy and genuine person-ah iru. Life-la evlo problems vandhaalum, don't forget to smile and never stop believing in yourself. Unakku edhavadhu kashtam irundha, as a friend naan unakku support-ah iruppen. Namma friendship-la ipdiye neraya memories create pannuvom. Once again, Happiest Birthday eruma! 😂❤️🫂 Stay blessed, stay happy and keep smiling always! ♾️`,
     fortuneText: '"You possess a rare heart of gold and a fiery spirit. This year is preparing wonders beyond your wildest imagination. Keep conquering the world, Devu!"',
     photo1: null
   };
@@ -28,7 +24,7 @@ Here’s to another year of late-night gossips, uncontrollable laughter, dreams 
   // Load from URL parameters or localStorage if available
   function initConfigFromStorageOrURL() {
     const urlParams = new URLSearchParams(window.location.search);
-    
+
     if (urlParams.has('name')) currentConfig.recipientName = urlParams.get('name');
     if (urlParams.has('from')) currentConfig.senderName = urlParams.get('from');
     if (urlParams.has('quote')) currentConfig.heroSubtitle = urlParams.get('quote');
@@ -329,7 +325,7 @@ Here’s to another year of late-night gossips, uncontrollable laughter, dreams 
     { note: NOTES.A4, dur: 0.25, pause: 0.3 },
     { note: NOTES.F4, dur: 0.55, pause: 0.65 },
     { note: NOTES.G4, dur: 0.55, pause: 0.65 },
-    { note: NOTES.F4, dur: 1.2,  pause: 1.5 }
+    { note: NOTES.F4, dur: 1.2, pause: 1.5 }
   ];
 
   function playMelodyLoop() {
@@ -500,7 +496,7 @@ Here’s to another year of late-night gossips, uncontrollable laughter, dreams 
   function initScratchCard() {
     if (!scratchCanvas || !scratchCtx) return;
     isRevealed = false;
-    
+
     // Dynamic size matching container width
     const rect = scratchCanvas.parentElement.getBoundingClientRect();
     const w = Math.floor(rect.width) || 340;
