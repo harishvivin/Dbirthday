@@ -68,6 +68,9 @@
         <a href="#gift-section" class="btn btn-gold">
           <span>Open Devu's Gift 🎁</span>
         </a>
+        <a href="#memories-section" class="btn btn-wine">
+          <span>Our Memories 📸</span>
+        </a>
         <a href="#song-section" class="btn btn-outline">
           <span>Our Song 🎵</span>
         </a>
@@ -130,64 +133,144 @@
       </div>
     </section>
 
-    <!-- POLAROID PHOTO MEMORIES -->
+    <!-- MEMORIES & PHOTO GALLERY SECTION -->
     <section class="section memories-section" id="memories-section">
       <div class="section-header">
         <span class="section-tag">Golden Moments</span>
-        <h2 class="section-title">Memories & Smiles</h2>
-        <p class="section-desc">A gallery of happiness, cherished times, and shining milestones.</p>
+        <h2 class="section-title">Memories With Devu 📸</h2>
+        <p class="section-desc">Every photograph holds a laugh, a story, and a treasure from our journey.</p>
       </div>
 
-      <div class="polaroid-grid" id="polaroidGrid">
-        <!-- Card 1 -->
-        <div class="polaroid-card rotate-neg" id="polaroidCard1">
-          <div class="photo-frame">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"
-              alt="Devu" class="polaroid-img" id="polaroidImg1">
-            <label class="photo-upload-overlay" for="quickPhotoUpload" title="Click to upload Devu's real photo">
-              <span>📷 Change Photo</span>
-            </label>
-            <button type="button" class="mobile-photo-badge"
-              onclick="document.getElementById('quickPhotoUpload').click()" aria-label="Upload photo of Devu">
-              📷 Change Photo
-            </button>
-          </div>
-          <div class="polaroid-caption" id="caption1">The Queen Herself: Devatha ✨</div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="polaroid-card rotate-pos" id="polaroidCard2">
-          <div class="photo-frame">
-            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80"
-              alt="Joyful Moments" class="polaroid-img" id="polaroidImg2">
-          </div>
-          <div class="polaroid-caption" id="caption2">Pure Laughter & Shenanigans 💛</div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="polaroid-card rotate-slight" id="polaroidCard3">
-          <div class="photo-frame">
-            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80"
-              alt="Red Wine Toast" class="polaroid-img" id="polaroidImg3">
-          </div>
-          <div class="polaroid-caption" id="caption3">A Toast to Devu's Year 🍷</div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="polaroid-card rotate-neg-slight" id="polaroidCard4">
-          <div class="photo-frame">
-            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80"
-              alt="Best Friends" class="polaroid-img" id="polaroidImg4">
-          </div>
-          <div class="polaroid-caption" id="caption4">Besties For Life & Beyond 🥂</div>
-        </div>
+      <!-- Mobile Slider Status & Counter Bar -->
+      <div class="slider-status-bar">
+        <span class="slider-hint-text">👈 Swipe to view memories 👉</span>
+        <div class="slider-counter" id="sliderCounter">1 / 10</div>
       </div>
 
+      <!-- Gallery / Carousel Container -->
+      <div class="gallery-wrapper" id="galleryWrapper">
+        <button class="gallery-arrow-btn prev" id="galleryPrevBtn" aria-label="Previous photo" title="Previous photo">
+          ‹
+        </button>
+
+        <div class="memories-track" id="memoriesTrack">
+          <!-- Card 1 -->
+          <div class="memory-card" data-index="0">
+            <div class="memory-frame">
+              <img src="memories/vd1.jpeg" alt="The Birthday Queen Devatha" class="memory-img" id="polaroidImg1" loading="lazy">
+              <div class="memory-view-badge"><span>🔍 Expand</span></div>
+            </div>
+            <div class="memory-caption">The Birthday Queen: Devatha ✨</div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="memory-card" data-index="1">
+            <div class="memory-frame">
+              <img src="memories/vd2.jpeg" alt="Unfiltered Smiles & Endless Joy" class="memory-img" loading="lazy">
+              <div class="memory-view-badge"><span>🔍 Expand</span></div>
+            </div>
+            <div class="memory-caption">Unfiltered Smiles & Endless Joy 🌸</div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="memory-card" data-index="2">
+            <div class="memory-frame">
+              <img src="memories/vd3.jpeg" alt="Crazy Laughs & Shenanigans" class="memory-img" loading="lazy">
+              <div class="memory-view-badge"><span>🔍 Expand</span></div>
+            </div>
+            <div class="memory-caption">Crazy Laughs & Shenanigans 😂❤️</div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="memory-card" data-index="3">
+            <div class="memory-frame">
+              <img src="memories/vd4.jpeg" alt="That Irreplaceable Vibe" class="memory-img" loading="lazy">
+              <div class="memory-view-badge"><span>🔍 Expand</span></div>
+            </div>
+            <div class="memory-caption">That Irreplaceable Vibe 🌟</div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="memory-card" data-index="4">
+            <div class="memory-frame">
+              <img src="memories/vd5.jpeg" alt="Salem Memories & Golden Days" class="memory-img" loading="lazy">
+              <div class="memory-view-badge"><span>🔍 Expand</span></div>
+            </div>
+            <div class="memory-caption">Salem Memories & Golden Days 🚗</div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="memory-card" data-index="5">
+            <div class="memory-frame">
+              <img src="memories/vd6.jpeg" alt="Pure Happiness With Devu" class="memory-img" loading="lazy">
+              <div class="memory-view-badge"><span>🔍 Expand</span></div>
+            </div>
+            <div class="memory-caption">Pure Happiness With Devu 🥂</div>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="memory-card" data-index="6">
+            <div class="memory-frame">
+              <img src="memories/vd7.jpeg" alt="Mokka Jokes & Endless Talks" class="memory-img" loading="lazy">
+              <div class="memory-view-badge"><span>🔍 Expand</span></div>
+            </div>
+            <div class="memory-caption">Mokka Jokes & Endless Talks 💬</div>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="memory-card" data-index="7">
+            <div class="memory-frame">
+              <img src="memories/vd8.jpeg" alt="Always Got Your Back" class="memory-img" loading="lazy">
+              <div class="memory-view-badge"><span>🔍 Expand</span></div>
+            </div>
+            <div class="memory-caption">Always Got Your Back, Eruma 🫂</div>
+          </div>
+
+          <!-- Card 9 -->
+          <div class="memory-card" data-index="8">
+            <div class="memory-frame">
+              <img src="memories/vd9.jpeg" alt="Forever My Favorite Person" class="memory-img" loading="lazy">
+              <div class="memory-view-badge"><span>🔍 Expand</span></div>
+            </div>
+            <div class="memory-caption">Forever My Favorite Person 💕</div>
+          </div>
+
+          <!-- Card 10 -->
+          <div class="memory-card" data-index="9">
+            <div class="memory-frame">
+              <img src="memories/vd10.jpeg" alt="Cheers to Many More Years" class="memory-img" loading="lazy">
+              <div class="memory-view-badge"><span>🔍 Expand</span></div>
+            </div>
+            <div class="memory-caption">Cheers to Many More Years ♾️</div>
+          </div>
+        </div>
+
+        <button class="gallery-arrow-btn next" id="galleryNextBtn" aria-label="Next photo" title="Next photo">
+          ›
+        </button>
+      </div>
+
+      <!-- Slider Indicator Dots -->
+      <div class="gallery-dots" id="galleryDots"></div>
+
+      <!-- Hidden Photo Upload (fallback) -->
       <input type="file" id="quickPhotoUpload" accept="image/*" style="display: none;">
 
-      <div class="custom-photo-tip">
-        <span>💡 <em>Tip:</em> Tap <strong>"Change Photo"</strong> on the first Polaroid to put Devu's real photo
-          anytime!</span>
+      <!-- Full-Screen Lightbox Modal -->
+      <div class="lightbox-modal" id="lightboxModal" aria-hidden="true" role="dialog">
+        <div class="lightbox-overlay" id="lightboxOverlay"></div>
+        <div class="lightbox-container">
+          <button class="lightbox-close" id="lightboxClose" aria-label="Close fullscreen view">✕</button>
+          <button class="lightbox-nav-btn prev" id="lightboxPrev" aria-label="Previous photo">‹</button>
+          <div class="lightbox-stage">
+            <img src="" alt="Fullscreen Devu Memory" class="lightbox-image" id="lightboxImage">
+            <div class="lightbox-info">
+              <p class="lightbox-caption-text" id="lightboxCaption"></p>
+              <span class="lightbox-count" id="lightboxCount">1 of 10</span>
+            </div>
+          </div>
+          <button class="lightbox-nav-btn next" id="lightboxNext" aria-label="Next photo">›</button>
+        </div>
       </div>
     </section>
 

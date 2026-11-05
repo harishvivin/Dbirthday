@@ -30,9 +30,11 @@ An elegant, interactive, red wine-themed static birthday celebration webpage cra
    - Click the gift box to untie the golden ribbon and pop open the lid.
    - Reveals an intimate, heartfelt letter written specifically for your best friend Devu.
 
-5. **Polaroid Photo Memories**:
-   - Four aesthetic vintage polaroid frames with sweet bestie captions.
-   - **Custom Photo Upload**: Click *"Change Photo"* on the first polaroid to upload a picture of Devu directly from your computer or phone (saved securely in your browser's `localStorage`).
+5. **Golden Memories Photo Gallery & Mobile Touch Slider**:
+   - Displays all 10 personal photos of Devu (`memories/vd1.jpeg` through `vd10.jpeg`).
+   - **Desktop View**: Luxury multi-column vintage Polaroid gallery grid with gold-trim frames and handwritten cursive captions.
+   - **Mobile View**: Converts automatically into an intuitive, high-performance horizontal touch slider with swipe gestures, momentum scroll-snap, prev/next arrows, live slide counter (`1 / 10`), and interactive golden dot indicators.
+   - **Full-Screen Lightbox**: Tap any photo on desktop or mobile to open an immersive, high-resolution modal with swipe navigation and keyboard support.
 
 6. **The Song That Reminds Me Of You 🎵**:
    - A dedicated music player featuring a spinning velvet-wine vinyl record, animated equalizer bars, live progress bar, and play/pause controls playing your embedded song `song.mp3`.

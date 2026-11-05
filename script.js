@@ -492,8 +492,194 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 8. POLAROID PHOTO UPLOAD (REPLACE PHOTO FOR DEVU)
+  // 8. MEMORIES PHOTO GALLERY, MOBILE SLIDER & LIGHTBOX
   // ==========================================================================
+  const memoriesTrack = document.getElementById('memoriesTrack');
+  const memoryCards = document.querySelectorAll('.memory-card');
+  const galleryPrevBtn = document.getElementById('galleryPrevBtn');
+  const galleryNextBtn = document.getElementById('galleryNextBtn');
+  const galleryDotsWrap = document.getElementById('galleryDots');
+  const sliderCounter = document.getElementById('sliderCounter');
+
+  // Lightbox elements
+  const lightboxModal = document.getElementById('lightboxModal');
+  const lightboxOverlay = document.getElementById('lightboxOverlay');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxCount = document.getElementById('lightboxCount');
+
+  let currentSlideIndex = 0;
+  const totalSlides = memoryCards.length;
+
+  // Initialize navigation dots
+  if (galleryDotsWrap && totalSlides > 0) {
+    galleryDotsWrap.innerHTML = '';
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('button');
+      dot.className = `gallery-dot ${i === 0 ? 'active' : ''}`;
+      dot.type = 'button';
+      dot.setAttribute('aria-label', `Go to photo ${i + 1}`);
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        scrollToSlide(i);
+      });
+      galleryDotsWrap.appendChild(dot);
+    }
+  }
+
+  function updateSliderActiveState(index) {
+    if (index < 0 || index >= totalSlides) return;
+    currentSlideIndex = index;
+    if (sliderCounter) {
+      sliderCounter.textContent = `${index + 1} / ${totalSlides}`;
+    }
+    if (galleryDotsWrap) {
+      const dots = galleryDotsWrap.querySelectorAll('.gallery-dot');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === index);
+      });
+    }
+  }
+
+  function scrollToSlide(index) {
+    if (!memoriesTrack || !memoryCards[index]) return;
+    updateSliderActiveState(index);
+    const targetCard = memoryCards[index];
+    targetCard.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center'
+    });
+  }
+
+  if (galleryPrevBtn) {
+    galleryPrevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const prevIdx = (currentSlideIndex - 1 + totalSlides) % totalSlides;
+      scrollToSlide(prevIdx);
+    });
+  }
+
+  if (galleryNextBtn) {
+    galleryNextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const nextIdx = (currentSlideIndex + 1) % totalSlides;
+      scrollToSlide(nextIdx);
+    });
+  }
+
+  // Update active slide when scrolling/swiping on mobile with rAF
+  if (memoriesTrack && totalSlides > 0) {
+    let scrollRaf = null;
+    memoriesTrack.addEventListener('scroll', () => {
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = requestAnimationFrame(() => {
+        const trackRect = memoriesTrack.getBoundingClientRect();
+        const trackCenter = trackRect.left + trackRect.width / 2;
+
+        let closestIdx = 0;
+        let minDistance = Infinity;
+
+        memoryCards.forEach((card, idx) => {
+          const cardRect = card.getBoundingClientRect();
+          const cardCenter = cardRect.left + cardRect.width / 2;
+          const dist = Math.abs(trackCenter - cardCenter);
+          if (dist < minDistance) {
+            minDistance = dist;
+            closestIdx = idx;
+          }
+        });
+
+        if (closestIdx !== currentSlideIndex) {
+          updateSliderActiveState(closestIdx);
+        }
+      });
+    }, { passive: true });
+  }
+
+  // Lightbox Modal Implementation
+  let currentLightboxIndex = 0;
+
+  function openLightbox(index) {
+    if (!lightboxModal || !memoryCards[index]) return;
+    currentLightboxIndex = index;
+    const card = memoryCards[index];
+    const img = card.querySelector('.memory-img');
+    const captionEl = card.querySelector('.memory-caption');
+
+    if (img && lightboxImage) {
+      lightboxImage.src = img.src;
+      lightboxImage.alt = img.alt || `Memory ${index + 1}`;
+    }
+    if (captionEl && lightboxCaption) {
+      lightboxCaption.textContent = captionEl.textContent;
+    }
+    if (lightboxCount) {
+      lightboxCount.textContent = `${index + 1} of ${totalSlides}`;
+    }
+
+    lightboxModal.classList.add('active');
+    lightboxModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    if (!lightboxModal) return;
+    lightboxModal.classList.remove('active');
+    lightboxModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function navigateLightbox(direction) {
+    const nextIdx = (currentLightboxIndex + direction + totalSlides) % totalSlides;
+    openLightbox(nextIdx);
+  }
+
+  // Open Lightbox on card click
+  memoryCards.forEach((card, idx) => {
+    card.addEventListener('click', () => {
+      openLightbox(idx);
+    });
+  });
+
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightboxOverlay) lightboxOverlay.addEventListener('click', closeLightbox);
+  if (lightboxPrev) lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(-1); });
+  if (lightboxNext) lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(1); });
+
+  // Keyboard navigation for Lightbox
+  window.addEventListener('keydown', (e) => {
+    if (!lightboxModal || !lightboxModal.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navigateLightbox(-1);
+    if (e.key === 'ArrowRight') navigateLightbox(1);
+  });
+
+  // Touch swipe support inside Lightbox
+  let lbTouchStartX = 0;
+  let lbTouchEndX = 0;
+  if (lightboxModal) {
+    lightboxModal.addEventListener('touchstart', (e) => {
+      lbTouchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    lightboxModal.addEventListener('touchend', (e) => {
+      lbTouchEndX = e.changedTouches[0].screenX;
+      const diffX = lbTouchEndX - lbTouchStartX;
+      if (Math.abs(diffX) > 40) {
+        if (diffX > 0) {
+          navigateLightbox(-1); // swipe right -> prev
+        } else {
+          navigateLightbox(1);  // swipe left -> next
+        }
+      }
+    }, { passive: true });
+  }
+
+  // Optional custom photo upload handler (fallback)
   const quickPhotoUpload = document.getElementById('quickPhotoUpload');
   const polaroidImg1 = document.getElementById('polaroidImg1');
 
@@ -502,7 +688,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const reader = new FileReader();
     reader.onload = (e) => {
       const base64 = e.target.result;
-      currentConfig.photo1 = base64;
       if (polaroidImg1) polaroidImg1.src = base64;
       try {
         localStorage.setItem('devu_custom_photo', base64);
