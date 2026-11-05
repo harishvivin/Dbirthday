@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1a0306">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Happy Birthday Devu! 🍷✨ Cheers to You, Devatha!</title>
+  <meta name="description" content="A special, red wine themed luxury birthday celebration webpage crafted for Devatha (Devu).">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;900&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Floating Golden & Wine Dust Canvas -->
+  <canvas id="sparkleCanvas"></canvas>
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Top Ambient Sound & Actions Bar -->
+  <header class="top-nav">
+    <div class="brand">
+      <span class="wine-glass-icon">🍷</span>
+      <span class="brand-text">Devu's Birthday Toast</span>
+      <span class="brand-text-mobile">Devu 🍷</span>
+    </div>
+    <div class="nav-actions">
+      <button id="musicToggleBtn" class="pill-btn" title="Play Birthday Music-Box Melody" aria-label="Toggle Birthday Melody">
+        <span class="icon">🎵</span>
+        <span class="btn-text"><span class="desktop-only">Music: </span><strong id="musicStatus">OFF</strong></span>
+      </button>
+      <button id="confettiBtn" class="pill-btn" title="Throw Confetti for Devu!" aria-label="Cheers Confetti">
+        <span class="icon">🎉</span>
+        <span class="btn-text">Cheers!</span>
+      </button>
+      <button id="customizeBtn" class="pill-btn primary-pill" title="Edit details or photo" aria-label="Customize page">
+        <span class="icon">⚙️</span>
+        <span class="btn-text"><span class="desktop-only">Personalize</span><span class="mobile-only">Edit</span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="page-container">
+
+    <!-- HERO CELEBRATION SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="hero-badge">
+        <span class="sparkle">✦</span>
+        <span>A Special Toast to My Best Friend</span>
+        <span class="sparkle">✦</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="sub-greeting">Happy Birthday</span>
+        <span class="recipient-name" id="displayRecipientName">Devu ✨</span>
+        <span class="full-name-tag">(Devatha)</span>
+      </h1>
+
+      <p class="hero-subtitle" id="displayHeroSubtitle">
+        "Like the rarest vintage of fine red wine, our friendship only grows deeper, richer, and more priceless with every year."
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#cake-section" class="btn btn-gold">
+          <span>Make a Wish 🎂</span>
+        </a>
+        <a href="#gift-section" class="btn btn-outline">
+          <span>Open Devu's Gift 🎁</span>
+        </a>
+        <a href="#scratch-section" class="btn btn-glass">
+          <span>Secret Fortune 👑</span>
+        </a>
+      </div>
+
+      <!-- Quick Scroll Indicator -->
+      <div class="scroll-cue">
+        <span>Scroll down to celebrate</span>
+        <div class="scroll-arrow">↓</div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE BIRTHDAY CAKE & CANDLE SECTION -->
+    <section class="section cake-section" id="cake-section">
+      <div class="section-header">
+        <span class="section-tag">Birthday Ritual</span>
+        <h2 class="section-title">Make a Wish, Devu!</h2>
+        <p class="section-desc">Close your eyes, make the biggest wish of your heart, and blow out the candles!</p>
+      </div>
+
+      <div class="cake-stage">
+        <div class="cake-container" id="cakeContainer" title="Click a flame to blow it out!">
+          <!-- Plate -->
+          <div class="cake-plate"></div>
+
+          <!-- Bottom Tier -->
+          <div class="cake-tier tier-bottom">
+            <div class="icing-drips">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="cake-ribbon"></div>
+          </div>
+
+          <!-- Middle Tier -->
+          <div class="cake-tier tier-middle">
+            <div class="icing-drips">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="gold-pearls">
+              <i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+
+          <!-- Top Tier -->
+          <div class="cake-tier tier-top">
+            <div class="icing-drips">
+              <span></span><span></span><span></span>
+            </div>
+            
+            <!-- Candles -->
+            <div class="candles-wrapper" id="candlesWrapper">
+              <div class="candle" data-lit="true">
+                <div class="flame"></div>
+                <div class="smoke"></div>
+                <div class="wick"></div>
+                <div class="candle-body"></div>
+              </div>
+              <div class="candle active" data-lit="true">
+                <div class="flame"></div>
+                <div class="smoke"></div>
+                <div class="wick"></div>
+                <div class="candle-body"></div>
+              </div>
+              <div class="candle" data-lit="true">
+                <div class="flame"></div>
+                <div class="smoke"></div>
+                <div class="wick"></div>
+                <div class="candle-body"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cake-controls">
+          <button id="blowCandleBtn" class="btn btn-gold">
+            <span class="btn-icon">💨</span>
+            <span id="blowBtnLabel">Blow Out Candles</span>
+          </button>
+          <button id="relightCandleBtn" class="btn btn-outline" style="display: none;">
+            <span class="btn-icon">🔥</span>
+            <span>Relight Candles</span>
+          </button>
+        </div>
+
+        <div id="wishMessagePrompt" class="wish-message-prompt hidden">
+          <div class="gold-sparkle-text">✨ Devu's wish has been granted! ✨</div>
+          <p>May this year shower you with laughter, boundless success, endless peace, and unforgettable adventures!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNWRAP DEVU'S LUXURY GIFT BOX -->
+    <section class="section gift-section" id="gift-section">
+      <div class="section-header">
+        <span class="section-tag">Best Friend's Heart</span>
+        <h2 class="section-title">A Special Letter For Devu</h2>
+        <p class="section-desc">Tap the velvet wine gift box below to untie the golden ribbon and read your letter.</p>
+      </div>
+
+      <div class="gift-showcase">
+        <div class="gift-box" id="giftBox" role="button" tabindex="0" title="Click to open the gift!">
+          <div class="gift-lid" id="giftLid">
+            <div class="gift-bow">
+              <span class="bow-left"></span>
+              <span class="bow-center"></span>
+              <span class="bow-right"></span>
+            </div>
+            <div class="ribbon-horizontal"></div>
+          </div>
+          <div class="gift-base">
+            <div class="ribbon-vertical"></div>
+            <div class="gift-tag-hint">Tap to Open Devu's Box 🎁</div>
+          </div>
+        </div>
+
+        <!-- The Revealed Letter / Card -->
+        <div class="birthday-letter-card glass-panel hidden" id="letterCard">
+          <div class="letter-seal">🍷</div>
+          <h3 class="letter-title">Dearest Devu (Devatha),</h3>
+          <div class="letter-body" id="displayLetterBody">
+            <p>From being my ultimate confidante to my partner-in-crime, you are hands down the best friend anyone could ever ask for.</p>
+            <p>Your smile lights up every room, your strength inspires me every single day, and your chaotic, joyful energy makes life a million times better. Thank you for always listening, for laughing at the silly jokes, and for simply being your incredible self.</p>
+            <p>Here’s to another year of late-night gossips, uncontrollable laughter, dreams coming true, and clinking glasses of red wine together!</p>
+            <p class="letter-signature">Forever your best friend,<br><strong id="displaySenderName">Your Bestie Always ❤️</strong></p>
+          </div>
+          <button id="closeLetterBtn" class="btn btn-sm btn-outline">Close Letter</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- POLAROID PHOTO MEMORIES -->
+    <section class="section memories-section" id="memories-section">
+      <div class="section-header">
+        <span class="section-tag">Golden Moments</span>
+        <h2 class="section-title">Memories & Smiles</h2>
+        <p class="section-desc">A gallery of happiness, cherished times, and shining milestones.</p>
+      </div>
+
+      <div class="polaroid-grid" id="polaroidGrid">
+        <!-- Card 1 -->
+        <div class="polaroid-card rotate-neg" id="polaroidCard1">
+          <div class="photo-frame">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Devu" class="polaroid-img" id="polaroidImg1">
+            <label class="photo-upload-overlay" for="quickPhotoUpload" title="Click to upload Devu's real photo">
+              <span>📷 Change Photo</span>
+            </label>
+            <button type="button" class="mobile-photo-badge" onclick="document.getElementById('quickPhotoUpload').click()" aria-label="Upload photo of Devu">
+              📷 Change Photo
+            </button>
+          </div>
+          <div class="polaroid-caption" id="caption1">The Queen Herself: Devatha ✨</div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="polaroid-card rotate-pos" id="polaroidCard2">
+          <div class="photo-frame">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80" alt="Joyful Moments" class="polaroid-img" id="polaroidImg2">
+          </div>
+          <div class="polaroid-caption" id="caption2">Pure Laughter & Shenanigans 💛</div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="polaroid-card rotate-slight" id="polaroidCard3">
+          <div class="photo-frame">
+            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80" alt="Red Wine Toast" class="polaroid-img" id="polaroidImg3">
+          </div>
+          <div class="polaroid-caption" id="caption3">A Toast to Devu's Year 🍷</div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="polaroid-card rotate-neg-slight" id="polaroidCard4">
+          <div class="photo-frame">
+            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80" alt="Best Friends" class="polaroid-img" id="polaroidImg4">
+          </div>
+          <div class="polaroid-caption" id="caption4">Besties For Life & Beyond 🥂</div>
+        </div>
+      </div>
+
+      <input type="file" id="quickPhotoUpload" accept="image/*" style="display: none;">
+
+      <div class="custom-photo-tip">
+        <span>💡 <em>Tip:</em> Tap <strong>"Change Photo"</strong> on the first Polaroid or click <strong>Customize</strong> in the top menu to put Devu's real photo!</span>
+      </div>
+    </section>
+
+    <!-- SCRATCH CARD: DEVU'S SECRET FORTUNE -->
+    <section class="section scratch-section" id="scratch-section">
+      <div class="section-header">
+        <span class="section-tag">Interactive Secret</span>
+        <h2 class="section-title">Devu's Secret Birthday Fortune</h2>
+        <p class="section-desc">Scratch off the golden seal below with your cursor or touch to uncover your secret message!</p>
+      </div>
+
+      <div class="scratch-wrapper">
+        <div class="scratch-card-box">
+          <div class="scratch-secret-content">
+            <div class="secret-emoji">👑</div>
+            <h4>Devatha, You Are Unstoppable!</h4>
+            <p id="displayFortuneText">"You possess a rare heart of gold and a fiery spirit. This year is preparing wonders beyond your wildest imagination. Keep conquering the world, Devu!"</p>
+            <div class="secret-tag">Best Friend Guarantee: 100% Proud of You 🌟</div>
+          </div>
+          <!-- Scratch Surface Canvas -->
+          <canvas id="scratchCanvas" width="340" height="220"></canvas>
+        </div>
+        <div class="scratch-action-bar">
+          <button id="resetScratchBtn" class="btn btn-sm btn-outline">Cover Scratch Card Again</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+      <div class="footer-toast">
+        <span class="wine-toast-emoji">🍷 Happy Birthday, Devu! 🥂</span>
+      </div>
+      <p class="footer-text">
+        Crafted with all the love in the universe, deep red wine aesthetics & golden sparkle for Devatha.
+      </p>
+      <div class="footer-meta">
+        <span>Colors: Velvet Burgundy, Bordeaux Wine & Royal Gold</span>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- CUSTOMIZATION MODAL -->
+  <div class="modal-overlay hidden" id="customModal">
+    <div class="modal-card glass-panel">
+      <div class="modal-header">
+        <h3>Personalize Devu's Page 🍷</h3>
+        <button id="closeModalBtn" class="close-x" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="modal-instruction">
+          Update Devu's nicknames, your name, special messages, or upload her favorite photo!
+        </p>
+
+        <div class="form-group">
+          <label for="modalRecipientInput">Nickname (Hero Display)</label>
+          <input type="text" id="modalRecipientInput" placeholder="e.g. Devu ✨">
+        </div>
+
+        <div class="form-group">
+          <label for="modalSubtitleInput">Hero Headline Quote</label>
+          <input type="text" id="modalSubtitleInput" placeholder="Sweet quote about friendship or wine...">
+        </div>
+
+        <div class="form-group">
+          <label for="modalSenderInput">Your Name (Sender)</label>
+          <input type="text" id="modalSenderInput" placeholder="e.g. Your Bestie, Alex, Ananya">
+        </div>
+
+        <div class="form-group">
+          <label for="modalLetterInput">Letter in the Gift Box</label>
+          <textarea id="modalLetterInput" rows="4" placeholder="Your heartfelt personal letter for Devu..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="modalFortuneInput">Secret Scratch Fortune Message</label>
+          <input type="text" id="modalFortuneInput" placeholder="The hidden compliment or secret joke...">
+        </div>
+
+        <div class="form-group">
+          <label>Upload Devu's Real Photo (Polaroid 1)</label>
+          <input type="file" id="modalPhotoInput" accept="image/*">
+          <small class="hint">Upload a picture of Devu to place on the main polaroid card.</small>
+        </div>
+
+        <div class="share-box">
+          <label>Shareable Link for Devu:</label>
+          <div class="share-input-group">
+            <input type="text" id="shareUrlInput" readonly>
+            <button id="copyShareUrlBtn" class="btn btn-sm btn-gold">Copy Link 📋</button>
+          </div>
+          <span id="copySuccessMsg" class="copy-success hidden">Link copied to clipboard! ✨</span>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="saveCustomizeBtn" class="btn btn-gold">Apply Changes</button>
+        <button id="resetDefaultsBtn" class="btn btn-outline">Reset Defaults</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
