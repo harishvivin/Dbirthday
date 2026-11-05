@@ -41,9 +41,6 @@ An elegant, interactive, red wine-themed static birthday celebration webpage cra
    - Displays the heartfelt lyrics dedicated to Devu:
      > *Ethana thanima vattum bothum / Enakkul ketkkum geetham nee...*
 
-7. **Interactive Scratch Card (Devu's Secret Fortune)**:
-   - A gold foil scratch surface. Use your cursor or finger (on mobile) to scratch it off and reveal Devu's secret fortune and best-friend guarantee!
-
 ---
 
 ## 🚀 How to View & Open the Webpage
@@ -67,5 +64,5 @@ Then open `http://localhost:8000` in your web browser.
 ## 📁 File Structure
 - `index.html` — Semantic HTML structure & accessible layout.
 - `style.css` — Red wine color scheme, velvet gradients, responsive grid, and fluid animations.
-- `script.js` — Confetti engine, Web Audio synth, candle physics, scratch card engine, and storage.
+- `script.js` — Confetti engine, Web Audio synth, memory gallery slider, and audio player engine.
 

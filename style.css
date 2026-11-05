@@ -1371,77 +1371,6 @@ body::before {
   line-height: 1.6;
 }
 
-/* ==========================================================================
-   SCRATCH CARD SECRET COMPLIMENT
-   ========================================================================== */
-.scratch-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.scratch-card-box {
-  position: relative;
-  width: min(340px, calc(100vw - 32px));
-  height: 220px;
-  max-width: 100%;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(212, 175, 55, 0.3);
-  border: 2px solid var(--gold-primary);
-}
-
-.scratch-secret-content {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #420812 0%, #200307 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 20px;
-  color: var(--text-primary);
-}
-
-.secret-emoji {
-  font-size: 2rem;
-  margin-bottom: 6px;
-}
-
-.scratch-secret-content h4 {
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  color: var(--gold-light);
-  margin-bottom: 8px;
-}
-
-.scratch-secret-content p {
-  font-size: 0.88rem;
-  line-height: 1.5;
-  color: var(--text-muted);
-  margin-bottom: 10px;
-}
-
-.secret-tag {
-  font-size: 0.75rem;
-  color: var(--gold-primary);
-  font-weight: 600;
-  background: rgba(212, 175, 55, 0.12);
-  padding: 3px 10px;
-  border-radius: 12px;
-}
-
-#scratchCanvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  cursor: crosshair;
-  touch-action: none;
-}
 
 /* ==========================================================================
    FORM CONTROLS (SHARED)
@@ -1859,11 +1788,6 @@ body::before {
     display: inline !important;
   }
 
-  .scratch-card-box {
-    width: min(340px, calc(100vw - 28px));
-    height: 210px;
-  }
-
   .vinyl-disc,
   .vinyl-record-wrap {
     width: 150px;
@@ -1907,25 +1831,6 @@ body::before {
 
   .hero-title .sub-greeting {
     font-size: 1.85rem;
-  }
-
-  .scratch-card-box {
-    width: calc(100vw - 24px);
-    height: 195px;
-  }
-
-  .scratch-secret-content h4 {
-    font-size: 1rem;
-  }
-
-  .scratch-secret-content p {
-    font-size: 0.78rem;
-    line-height: 1.35;
-  }
-
-  .scratch-action-bar .btn {
-    font-size: 0.8rem;
-    padding: 6px 14px;
   }
 
   .memory-caption {

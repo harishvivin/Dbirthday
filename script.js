@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     heroSubtitle: '"Like the rarest vintage of fine red wine, our friendship only grows deeper, richer, and more priceless with every year."',
     senderName: 'Yours Vivin Always ❤️',
     letterBody: `First of all, un life-la nee always happy-ah irukkanum, un dreams ellam achieve pannanum. Namma friendship start aagi romba naal aagala, but indha short time-la neraya beautiful memories create pannirukkom. Un kooda pesuradhu, random-ah sirikkuradhu, mokka jokes, chinna chinna arguments, andha Salem memories ellame enakku romba special. 😂❤️ Sometimes words-la explain panna mudiyadha alavukku sila friendships namma life-la meaningful-ah maaridum, and namma friendship-um appadi dhaan. Nee eppovume indha same happy, crazy and genuine person-ah iru. Life-la evlo problems vandhaalum, don't forget to smile and never stop believing in yourself. Unakku edhavadhu kashtam irundha, as a friend naan unakku support-ah iruppen. Namma friendship-la ipdiye neraya memories create pannuvom. Once again, Happiest Birthday eruma! 😂❤️🫂 Stay blessed, stay happy and keep smiling always! ♾️`,
-    fortuneText: '"You possess a rare heart of gold and a fiery spirit. This year is preparing wonders beyond your wildest imagination. Keep conquering the world, Devu!"',
     photo1: null
   };
 
@@ -29,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (urlParams.has('from')) currentConfig.senderName = urlParams.get('from');
     if (urlParams.has('quote')) currentConfig.heroSubtitle = urlParams.get('quote');
     if (urlParams.has('msg')) currentConfig.letterBody = urlParams.get('msg');
-    if (urlParams.has('fortune')) currentConfig.fortuneText = urlParams.get('fortune');
 
     const savedPhoto = localStorage.getItem('devu_custom_photo');
     if (savedPhoto) {
@@ -43,14 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const elRecipient = document.getElementById('displayRecipientName');
     const elSubtitle = document.getElementById('displayHeroSubtitle');
     const elSender = document.getElementById('displaySenderName');
-    const elFortune = document.getElementById('displayFortuneText');
     const elLetterBody = document.getElementById('displayLetterBody');
     const elPhoto1 = document.getElementById('polaroidImg1');
 
     if (elRecipient) elRecipient.textContent = currentConfig.recipientName;
     if (elSubtitle) elSubtitle.textContent = currentConfig.heroSubtitle;
     if (elSender) elSender.textContent = currentConfig.senderName;
-    if (elFortune) elFortune.textContent = currentConfig.fortuneText;
 
     if (elLetterBody) {
       const paragraphs = currentConfig.letterBody.split('\n\n').filter(p => p.trim().length > 0);
@@ -344,155 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 7. INTERACTIVE SCRATCH CARD: DEVU'S SECRET FORTUNE
-  // ==========================================================================
-  const scratchCanvas = document.getElementById('scratchCanvas');
-  const resetScratchBtn = document.getElementById('resetScratchBtn');
-  let scratchCtx = null;
-  let isScratching = false;
-  let isRevealed = false;
-
-  if (scratchCanvas) {
-    scratchCtx = scratchCanvas.getContext('2d');
-    // Ensure initial layout has settled before sizing
-    setTimeout(initScratchCard, 50);
-  }
-
-  function initScratchCard() {
-    if (!scratchCanvas || !scratchCtx) return;
-    isRevealed = false;
-
-    // Dynamic size matching container width
-    const rect = scratchCanvas.parentElement.getBoundingClientRect();
-    const w = Math.floor(rect.width) || 340;
-    const h = Math.floor(rect.height) || 220;
-
-    scratchCanvas.width = w;
-    scratchCanvas.height = h;
-
-    // Fill with metallic wine gold coating
-    const grad = scratchCtx.createLinearGradient(0, 0, w, h);
-    grad.addColorStop(0, '#d4af37');
-    grad.addColorStop(0.3, '#fbeec1');
-    grad.addColorStop(0.7, '#aa7c11');
-    grad.addColorStop(1, '#e5c158');
-
-    scratchCtx.fillStyle = grad;
-    scratchCtx.fillRect(0, 0, w, h);
-
-    // Decorative text overlay on gold foil
-    scratchCtx.fillStyle = '#2b050b';
-    scratchCtx.font = 'bold ' + Math.max(14, Math.floor(w * 0.052)) + 'px "Cinzel", Georgia, serif';
-    scratchCtx.textAlign = 'center';
-    scratchCtx.textBaseline = 'middle';
-    scratchCtx.fillText('✨ Scratch For Devu ✨', w / 2, h / 2 - 12);
-
-    scratchCtx.font = Math.max(11, Math.floor(w * 0.038)) + 'px "Plus Jakarta Sans", sans-serif';
-    scratchCtx.fillStyle = '#420a13';
-    scratchCtx.fillText('(Touch or drag cursor here)', w / 2, h / 2 + 16);
-  }
-
-  // Handle mobile screen orientation change / resize
-  let resizeTimeout = null;
-  window.addEventListener('resize', () => {
-    if (resizeTimeout) clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      if (scratchCanvas && !isRevealed) {
-        initScratchCard();
-      }
-    }, 250);
-  });
-
-  function scratchAt(x, y) {
-    if (!scratchCtx || isRevealed) return;
-
-    scratchCtx.globalCompositeOperation = 'destination-out';
-    scratchCtx.beginPath();
-    scratchCtx.arc(x, y, Math.max(18, scratchCanvas.width * 0.065), 0, Math.PI * 2);
-    scratchCtx.fill();
-
-    checkScratchProgress();
-  }
-
-  function checkScratchProgress() {
-    if (isRevealed) return;
-    try {
-      const imgData = scratchCtx.getImageData(0, 0, scratchCanvas.width, scratchCanvas.height);
-      const pixels = imgData.data;
-      let transparentCount = 0;
-      const totalPixels = pixels.length / 4;
-
-      for (let i = 3; i < pixels.length; i += 16) {
-        if (pixels[i] === 0) {
-          transparentCount++;
-        }
-      }
-
-      const sampleCount = totalPixels / 4;
-      if (transparentCount / sampleCount > 0.40) {
-        // More than 40% scratched, reveal completely!
-        isRevealed = true;
-        scratchCtx.clearRect(0, 0, scratchCanvas.width, scratchCanvas.height);
-        launchConfetti(70);
-        playChimeNote(784, 0.5);
-      }
-    } catch (e) {
-      // Ignore security/origin edge cases
-    }
-  }
-
-  function getScratchCoords(e) {
-    const rect = scratchCanvas.getBoundingClientRect();
-    const touch = (e.touches && e.touches.length > 0) ? e.touches[0] : ((e.changedTouches && e.changedTouches.length > 0) ? e.changedTouches[0] : e);
-    const clientX = touch.clientX;
-    const clientY = touch.clientY;
-    const scaleX = rect.width ? scratchCanvas.width / rect.width : 1;
-    const scaleY = rect.height ? scratchCanvas.height / rect.height : 1;
-
-    return {
-      x: (clientX - rect.left) * scaleX,
-      y: (clientY - rect.top) * scaleY
-    };
-  }
-
-  if (scratchCanvas) {
-    scratchCanvas.addEventListener('mousedown', (e) => {
-      isScratching = true;
-      const { x, y } = getScratchCoords(e);
-      scratchAt(x, y);
-    });
-
-    window.addEventListener('mouseup', () => { isScratching = false; });
-
-    scratchCanvas.addEventListener('mousemove', (e) => {
-      if (!isScratching) return;
-      const { x, y } = getScratchCoords(e);
-      scratchAt(x, y);
-    });
-
-    // Touch events for mobile
-    scratchCanvas.addEventListener('touchstart', (e) => {
-      isScratching = true;
-      const { x, y } = getScratchCoords(e);
-      scratchAt(x, y);
-    }, { passive: true });
-
-    scratchCanvas.addEventListener('touchmove', (e) => {
-      if (!isScratching) return;
-      if (e.cancelable) e.preventDefault();
-      const { x, y } = getScratchCoords(e);
-      scratchAt(x, y);
-    }, { passive: false });
-
-    scratchCanvas.addEventListener('touchend', () => { isScratching = false; });
-  }
-
-  if (resetScratchBtn) {
-    resetScratchBtn.addEventListener('click', initScratchCard);
-  }
-
-  // ==========================================================================
-  // 8. MEMORIES PHOTO GALLERY, MOBILE SLIDER & LIGHTBOX
+  // 7. MEMORIES PHOTO GALLERY, MOBILE SLIDER & LIGHTBOX
   // ==========================================================================
   const memoriesTrack = document.getElementById('memoriesTrack');
   const memoryCards = document.querySelectorAll('.memory-card');
